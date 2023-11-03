@@ -1,0 +1,30 @@
+{% block body %}
+{% include 'header.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Category has been updated");
+    window.location = ("{% url 'view_category' %}")
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("something went wrong, Try again..");
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <h2 class = "text-center" style = "color : red ; font-weight : bold ;
+     font-family : Castellar">" Edit Category "</h2>
+<form class="container mt-4" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label><b>Category Name</b></label>
+    <input type = "text" name="cname" class="form-control" placeholder="Enter category name" required value="{{category.categoryname}}">
+
+    <input type="submit" value="Submit" class="btn btn-primary my-2"style="width:200px">
+    </div>
+
+</form>
+
+{% endblock %}

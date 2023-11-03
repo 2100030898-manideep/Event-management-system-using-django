@@ -1,0 +1,107 @@
+{% load static %}
+<head>
+    <title>EVM-SYSTEM</title>
+    
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="{% static 'style.css' %} ">
+     
+    </head>c
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-dark pl-5">
+        <a class="navbar-brand" style = "color : white ; font-weight : bold">
+        Event Management System
+        </a>
+
+        <button type = button class="navbar-toggler" data-toggle="collapse"
+        data-target="#abc">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="abc" >
+        <ul class="navbar-nav pl-5 ">
+
+          {% if not request.user.is_authenticated %}
+        <li class = "nav-item" >
+        <a href = "{% url 'index' %}" class="nav-link"><i class="fas fa-home">&nbsp;</i>Home</a>
+        <li>
+          <li class = "nav-item">
+            <a href = "{% url 'Login' %}" class="nav-link">
+              <i class="fas fa-sign-in-alt"></i></i>&nbsp;Admin Login </a>
+          <li>
+            <li class = "nav-item">
+              <a href = "{% url 'Ownerlogin' %}" class="nav-link">
+                <i class="fas fa-sign-in-alt"></i></i>&nbsp;Owner Login </a>
+            <li>
+
+            <li class = "nav-item">
+              <a href = "{% url 'Userlogin' %}" class="nav-link">
+                <i class="fas fa-sign-in-alt"></i></i>&nbsp;User Login </a>
+            <li>
+
+        <li class = "nav-item">
+        <a href = "{% url 'about' %}" class="nav-link">
+          <i class="fas fa-address-card"></i>&nbsp;About</a>
+        <li>
+
+        <li class = "nav-item">
+        <a href = "{% url 'contact' %}" class="nav-link"><i class="far fa-address-book"></i>&nbsp;Contact </a>
+        <li>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'innerhome' %}"><i class="fas fa-home"></i> Dashboard</a>
+          </li>
+           <li class="nav-item dropdown"><a class="nav-link pl-3 dropdown-toggle" data-toggle="dropdown" href="#">Event</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'add_event' %}">Add Event</a>
+              <a class="dropdown-item" href="{% url 'view_event' %}">View Event</a>
+
+            </div>
+          </li>
+          <li class="nav-item dropdown"><a class="nav-link pl-3 dropdown-toggle" data-toggle="dropdown" href="#"> Sponser</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'add_sponsor' %}">Add Sponser</a>
+              <a class="dropdown-item" href="{% url 'view_sponsor' %}">View Sponser</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown"><a class="nav-link pl-3 dropdown-toggle" data-toggle="dropdown" href="#"> Category</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'add_category'%}">Add Category</a>
+              <a class="dropdown-item" href="{% url 'view_category' %}">View Category</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pl-3" href="{% url 'view_user' %}"><i class="fas fa-sign-out-alt"></i> View User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pl-3" href="{% url 'view_owner' %}"><i class="fas fa-sign-out-alt"></i> View owners</a>
+          </li>
+
+             <li class="nav-item dropdown"><a class="nav-link pl-3 dropdown-toggle" data-toggle="dropdown" href="#"> Bookings</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="{% url 'booking_request' %}">New Booking</a>
+              <a class="dropdown-item" href="{% url 'accepted_booking' %}">Accepted Booking</a>
+                <a class="dropdown-item" href="{% url 'rejected_booking' %}">Rejected Booking</a>
+                <a class="dropdown-item" href="{% url 'confirmed_booking' %}">Confirmed Booking</a>
+                <a class="dropdown-item" href="{% url 'all_booking' %}">All Booking</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link pl-3" href="{% url 'change_passwordadmin' %}"><i class="fas fa-sign-out-alt"></i> Change password</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link pl-3" href="{% url 'Logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          </li>
+          {% endif %}
+        </ul>
+        </div>
+        </nav>
+        

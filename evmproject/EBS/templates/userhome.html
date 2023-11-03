@@ -1,0 +1,67 @@
+{% block body %}
+{% include 'navigation.html' %}
+
+<h4 class="mt-4 ml-3" style="font-size: 22px; color: blueviolet;">Welcome {{request.user.first_name}} {{request.user.last_name}}</h4>
+
+<div class="container" style = "margin-top:50px">
+    <h2 class="text-center" style = "font-family : Castellar ; font-weight : bold ; color : red">User Profile</h2>
+    <br>
+    <form method = post enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-8">    
+    <table class = "table">
+    <tr>
+    <th>First Name</th>
+    <td><input type = text name='fname' class="form-control" value="{{data.user.first_name}}"></td>
+    </tr>
+
+        <tr>
+    <th>Last Name</th>
+    <td><input type = text name='lname' class="form-control"  value="{{data.user.last_name}}"></td>
+    </tr>
+    <tr>
+    <th>EmailID</th>
+    <td>{{data.user.username}}</td>
+    </tr>
+    <tr>
+    <th>Contact</th>
+    <td><input type = text name='contact' class="form-control" value="{{data.mobile}}"></td>
+    </tr>
+
+        <tr>
+    <th>Address</th>
+    <td><textarea name="address" class="form-control" placeholder="Address" required>{{data.address}}</textarea></td>
+    </tr>
+
+        <tr>
+    <th>Reg. Date</th>
+    <td>{{data.regdate}}</td>
+    </tr>
+
+    </table></div>
+    <div class="col-sm-3">
+        <label>Image</label>
+        <input type="file" class="form-control" name="image">
+
+      <img src="{{data.image.url}}" width="220px" height="220px">
+</div>
+    <input type = submit value = "Edit Profile" name = submit class="btn btn-primary">
+    </form>
+    </div>
+
+
+{% if error == "no" %}
+<script>
+    alert("Profile Updated Successfully");
+    window.location = ('{% url "userhome" %}')
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("something went wrong");
+</script>
+{% endif %}
+{% endblock %}
+

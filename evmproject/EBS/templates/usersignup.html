@@ -1,0 +1,44 @@
+{% block body %}
+{% include 'header.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Registration Successful");
+    window.location = ("{% url 'Userlogin' %}")
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, Try again..");
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <h2 class = "text-center" style = "color : red ; font-weight : bold ;
+     font-family : Castellar">" User Login "</h2>
+<form class="container mt-4" name="signup" method="post" enctype="multipart/form-data" onsubmit="return checkpass();">
+    {% csrf_token %}
+    <label><b>First Name</b></label>
+    <input type = "text" name="fname" class="form-control" placeholder="Enter your name"required>
+     <label><b>Last Name</b></label>
+    <input type = "text" name="lname" class="form-control" placeholder="Enter your name"required>
+
+    <label><b>Email Id</b></label>
+    <input type = "email" name="email" class="form-control" placeholder="Enter your email"required>
+    <label><b>Password</b></label>
+    <input type = "password" name="pwd" class="form-control" placeholder="Enter password" required>
+    <label><b>contact</b>
+    </label><input type = "text" name="contact" class="form-control" placeholder="Enter your digit"required>
+     <label><b>Address</b>
+     </label>
+    <textarea name="address" class="form-control" placeholder="Address" required></textarea>
+    <label><b>PIC</b></label>
+    <input type="file" class="form-control" name="image"required>
+
+    <input type="submit" value="Submit" class="btn btn-primary my-2"style="width:200px">
+    </div>
+   
+</form>
+
+{% endblock %}

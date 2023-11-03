@@ -1,0 +1,54 @@
+{% block body %}
+{% include 'header.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Event detail has been updated successfully");
+    window.location = ("{% url 'view_event' %}")
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("something went wrong, Try again..");
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <h2 class = "text-center" style = "color : red ; font-weight : bold ;
+     font-family : Castellar">" Edit Event Detail "</h2>
+<form class="container mt-4" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label><b>Event Name</b></label>
+    <input type = "text" name="ename" class="form-control" placeholder="Enter Event name" required value="{{event.eventname}}">
+    <label><b>Image</b></label>
+    <img src="{{event.image.url}}" class="p-3" width="150" height="150">
+    <input type="file" name="image">
+    <br>
+    <label><b>Category</b></label>
+            <select name="category" class="form-control">
+                <option value="{{event.category}}">{{event.category}}</option>
+                {% for i in category %}
+            <option value="{{i.categoryname}}">{{i.categoryname}}</option>
+          {% endfor %}
+           </select>
+
+    <label><b>Description</b></label>
+    <textarea class="form-control" name="description" placeholder="Enter Description" required>{{event.description}}</textarea>
+
+    <label><b>StartDate [{{event.startdate}}]</b></label>
+    <input type = "date" name="startdate" class="form-control" value="{{event.startdate}}">
+    <label><b>EndDate [{{event.enddate}}]</b></label>
+    <input type = "date" name="enddate" class="form-control">
+    <label><b>venue(Event Address)</b></label>
+    <textarea class="form-control" name="venue" placeholder="Enter Address" required>{{event.venue}}</textarea>
+
+    <label><b>Entry Price</b>
+    </label><input type = "text" name="price" class="form-control" placeholder="Enter price" required value="{{event.entryprice}}">
+
+    <input type="submit" value="Submit" class="btn btn-primary my-2" style="width:200px">
+    </div>
+
+</form>
+
+{% endblock %}

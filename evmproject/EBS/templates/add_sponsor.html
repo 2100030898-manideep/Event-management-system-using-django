@@ -1,0 +1,37 @@
+{% block body %}
+{% include 'header.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Sponsor has been added successfully");
+    window.location = ("{% url 'view_sponsor' %}")
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("something went wrong, Try again..");
+</script>
+{% endif %}
+
+<div class="container mt-5">
+    <h2 class = "text-center" style = "color : red ; font-weight : bold ;
+     font-family : Castellar">" ADD Sponsor "</h2>
+<form class="container mt-4" name="signup" method="post" enctype="multipart/form-data" onsubmit="return checkpass();">
+    {% csrf_token %}
+    <label><b>Event Name</b></label>
+    <select name="event" class="form-control">
+        {% for i in event1 %}
+        <option value="{{i.id}}">{{i.eventname}} [{{i.id}}]</option>
+        {% endfor %}
+    </select>
+
+    <label><b>Image</b></label>
+    <input type="file" class="form-control" name="image" required>
+
+    <input type="submit" value="Submit" class="btn btn-primary my-2"style="width:200px">
+    </div>
+   
+</form>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load static %}
+{% block body %}
+{% include 'navigation.html' %}
+
+<div class="container" style="margin-top: 50px;">
+<h2 class = "text-center" style = "color : red ; font-weight : bold ;
+font-family : Castellar">" VIEW Event Details"</h2>
+<div class="row">
+<div class="col-sm-3" style="margin-top: 50px;">
+<img src="{{data.image.url}}" width="220px" height="220px">
+</div>
+
+    <div class="col-sm-8"> 
+    <h1 class="text-center mt-2">{{data.eventname}}</h1>
+    <div class="moro mt-4 ml-4">
+    <h5 style="margin-top: 20px;"> <span style="color: blueviolet;">Adress</span>  :  {{data.venue}}</h5>
+    <h5 style="margin-top: 20px;"><span style="color: blueviolet;">Description </span>  :  {{data.description}}</h5>
+    <h5 style="margin-top: 20px;"> <span style="color: rgb(43, 226, 171);">Start-date</span>  :  {{data.startdate}} & <span style="color: rgb(43, 226, 171);">End-date</span>  :  {{data.enddate}}</h5>
+    <h5 style="margin-top: 20px;"> <span style="color: rgb(43, 226, 83);">Entry Fee</span>  :  {{data.entryprice}}</h5>
+</div>
+    <td><a href="{% url 'book_now' data.id %}" class="btn btn-primary mt-4">Book Now</a></td>
+        </div>
+        </div>
+
+
+    <hr>
+
+<div class="container" style = "text-align : center">
+<h2 class="text-center" style = "color : red">Sponsors</h2>
+<br>
+    {% for i in sponsor %}
+<span class=col-sm-3>
+<img src={{i.sponsorimage.url}} class='img-thumbnail' width=70 height=70>
+</span>
+    {% endfor %}
+
+</div>
+
+</div>
+{% endblock %}

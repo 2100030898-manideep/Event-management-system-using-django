@@ -1,0 +1,132 @@
+{% load static %}
+{% block body %}
+{% include 'header.html' %}
+<script src = https://code.jquery.com/jquery-3.3.1.js></script>
+<script src = https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js></script>
+<script src = https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js></script>
+<script src = https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js></script>
+<script src = https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js></script>
+<script src = https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js></script>
+<script src = https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js></script>
+<script>
+  $(document).ready(function() {
+      $('#example').DataTable( {
+          dom: 'Bfrtip',
+          buttons: [
+              'copyHtml5',
+              'excelHtml5',
+              'csvHtml5',
+              'pdfHtml5'
+          ]
+      } );
+  } );
+  </script>
+<link rel = stylesheet href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<link rel = stylesheet href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+<!---data table end cdn-->
+
+<div class="container" style="margin-top: 50px;">
+    <h2 class = "text-center" style = "color : red ; font-weight : bold ;
+    font-family : Castellar">" View New Booking Request "</h2>
+<br><br>
+<table class="table table-bordered">
+ <tr align="center">
+<td colspan="4" style="font-size:20px;color:red">
+ Event Details</td></tr>
+
+    <tr>
+    <th>Event Name</th>
+    <td>{{booking.eventinfo.eventname}} </td>
+    <th>Event Category</th>
+    <td>{{booking.eventinfo.category}}</td>
+  </tr>
+  <tr>
+    <th>Entry Price</th>
+    <td>{{booking.eventinfo.entryprice}}</td>
+    <th>Event PIC</th>
+    <td><img src="{{booking.eventinfo.image.url}}" width="50px" height="50px"></td>
+  </tr>
+
+    <tr>
+    <th>Event StartDate</th>
+    <td>{{booking.eventinfo.startdate}} </td>
+    <th>Event EndDate</th>
+    <td>{{booking.eventinfo.enddate}}</td>
+  </tr>
+
+
+    <tr>
+    <th>Event Venue</th>
+    <td colspan="3">{{booking.eventinfo.venue}} </td>
+
+  </tr>
+
+    <tr>
+    <th>Description</th>
+    <td colspan="3">{{booking.eventinfo.description}} </td>
+
+  </tr>
+
+
+             <tr align="center">
+<td colspan="4" style="font-size:20px;color:red">
+ Booking Details</td></tr>
+
+  <tr>
+    <th>Booking Date</th>
+    <td>{{booking.bookingdate}}</td>
+     <th>Booking Status</th>
+    <td>{{booking.status}}</td>
+  </tr>
+
+     <tr>
+    <th>Total Persons</th>
+    <td>{{booking.person}}</td>
+     <th>Total Amount</th>
+    <td>{{booking.total}} Rs.</td>
+  </tr>
+
+     {% if booking.status == "pending" %}
+ <form method="post">
+    {% csrf_token %}
+      <tr>
+    <th>Select Status</th>
+    <td colspan="3">
+        <select class="form-control" name="status" required>
+            <option value="Accept(Not Paid)">Accept(Not Paid)</option>
+            <option value="Reject">Reject</option>
+        </select>
+    </td>
+  </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td colspan="3">
+                                                        <button type="submit" class="btn btn-primary pull-left">
+        Update <i class="fa fa-arrow-circle-right"></i>
+                                </button>
+
+                                                    </td>
+                                                </tr>
+ </form>
+
+     {% endif %}
+
+
+
+</table>
+
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('Booking status has been updated.');
+    window.location=('{% url 'bookingdetail_admin' booking.id %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('Something Went Wrong. Please try again');
+</script>
+{% endif %}
+
+{% endblock %}

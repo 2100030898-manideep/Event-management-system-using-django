@@ -1,0 +1,47 @@
+{% load static %}
+{% include "header.html" %}
+
+<marquee style="font-size: 22px; color:rgb(153, 184, 184);font-family: monotype corsiva;margin-top: 0.5%;cursor: pointer;">
+     Event Management System
+ </marquee>
+
+<!-- carousel start-->
+<div id="demo" class="carousel slide" data-ride="carousel" 
+style = "margin-top : 8px">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+    <li data-target="#demo" data-slide-to="3"></li> 
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active mb-3">
+      <img src="{% static 'img/1.jpeg' %}"  width="100%" height="500">
+    </div>
+    <div class="carousel-item mb-3">
+      <img src="{% static 'img/2.jpg' %}"  width="100%" height="500">
+    </div>
+    <div class="carousel-item mb-3">
+        <img src="{% static 'img/3.jpg' %}"  width="100%" height="500">
+      </div>
+    <div class="carousel-item mb-3">
+      <img src="{% static 'img/4.jpg' %}"  width="100%" height="500">
+    </div>  
+    <div class="carousel-item mb-3">
+        <img src="{% static 'img/6.jpg' %}"  width="100%" height="500">
+      </div>  
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo"
+  data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>

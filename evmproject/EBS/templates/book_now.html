@@ -1,0 +1,52 @@
+{% block body %}
+{% include 'navigation.html' %}
+
+{% if error == "no" %}
+<script>
+    alert("Booking request sent successfully");
+    window.location = ("{% url 'view_mybooking' %}")
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert("Something went wrong, Try again..");
+</script>
+{% endif %}
+
+
+<script>
+    function calc()
+    {
+
+     var quantity1 = document.getElementById("quantity").value;
+
+     var price1 = document.getElementById("price").value;
+     var totalprice = parseInt(quantity1)*parseInt(price1);
+
+     document.getElementById("total").value = totalprice;
+    }
+</script>
+
+
+<div class="container mt-5">
+    <h2 class = "text-center" style = "color : red ; font-weight : bold ;
+     font-family : Castellar">" Booking Page "</h2>
+<form class="container mt-4" name="signup" method="post" enctype="multipart/form-data" onsubmit="return checkpass();">
+    {% csrf_token %}
+    <label><b>Entry Fees</b></label>
+    <input type = "text" name="entryfees" class="form-control" value = "{{event1.entryprice}}" readonly id="price">
+
+
+    <label><b>Total Person</b></label>
+    <input type = "text" name="person" class="form-control" placeholder="Number of Person" required id="quantity" onkeyup = calc()>
+
+    <label><b>Total</b></label>
+    <input type = "text" name="total" class="form-control" value="" required id = "total">
+
+    <input type="submit" value="Submit" class="btn btn-primary my-2"style="width:200px">
+    </div>
+   
+</form>
+
+{% endblock %}
